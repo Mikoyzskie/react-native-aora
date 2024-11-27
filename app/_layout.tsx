@@ -8,6 +8,8 @@ import 'react-native-reanimated';
 
 import "./global.css";
 
+import GlobalProvider from "@/context/GlobalProvider"
+
 import { useColorScheme } from '@/hooks/useColorScheme';
 import React from 'react';
 
@@ -43,11 +45,13 @@ export default function RootLayout() {
     //   </Stack>
     //   <StatusBar style="auto" />
     // </ThemeProvider>
-    <Stack>
-      <Stack.Screen name='index' options={{ headerShown: false }} />
-      <Stack.Screen name='(auth)' options={{ headerShown: false }} />
-      <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-      {/* <Stack.Screen name='/search/[query]' options={{ headerShown: false }} /> */}
-    </Stack>
+    <GlobalProvider>
+      <Stack>
+        <Stack.Screen name='index' options={{ headerShown: false }} />
+        <Stack.Screen name='(auth)' options={{ headerShown: false }} />
+        <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+        {/* <Stack.Screen name='/search/[query]' options={{ headerShown: false }} /> */}
+      </Stack>
+    </GlobalProvider>
   );
 }
