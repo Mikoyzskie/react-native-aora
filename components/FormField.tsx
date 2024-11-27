@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, Image, KeyboardTypeOptions } from 'react-native'
 import React, { useState } from 'react'
 
 import { icons } from "../constants"
@@ -7,11 +7,12 @@ type FormFieldProps = {
   title: string;
   value: string;
   placeholder?: string;
-  handleChangeText: (e: any) => void;
+  handleChangeText: (e: string) => void;
   otherStyles: string;
+  keyboardType?: KeyboardTypeOptions;
 }
 
-const FormField = ({ title, value, placeholder, handleChangeText, otherStyles, ...props }: FormFieldProps) => {
+const FormField = ({ title, value, placeholder, handleChangeText, otherStyles, keyboardType, ...props }: FormFieldProps) => {
 
   const [showPassword, setShowPassword] = useState(false)
   const [focus, setFocus] = useState(false)
@@ -22,16 +23,18 @@ const FormField = ({ title, value, placeholder, handleChangeText, otherStyles, .
 
       <View className={`border-2 border-black-200  w-full h-16 px-4 bg-black-100 rounded-2xl items-center flex-row ${focus && 'border-secondary'}`}>
         <TextInput
-          className='flex-1 text-white font-psemibold text-base items-center align-middle justify-center w-full'
+          className='flex-1 text-white font-psemibold text-base w-full'
           value={value}
           placeholder={placeholder}
           placeholderTextColor={"#7b7b8b"}
           onChangeText={handleChangeText}
+          selectionColor={"#FF9C01"}
           secureTextEntry={title === "Password" && !showPassword}
-          keyboardType='email-address'
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}
+          keyboardType={keyboardType ? keyboardType : 'default'}
         />
+
 
         {title === "Password" && (
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
